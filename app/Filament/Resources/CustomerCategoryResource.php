@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
-use App\Models\Category;
+use App\Filament\Resources\CustomerCategoryResource\Pages;
+use App\Filament\Resources\CustomerCategoryResource\RelationManagers;
+use App\Models\CustomerCategory;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,14 +13,13 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CategoryResource extends Resource
+class CustomerCategoryResource extends Resource
 {
-    protected static ?string $model = Category::class;
-    protected static ?string $navigationGroup = 'Manajemen Produk';
-
+    protected static ?string $model = CustomerCategory::class;
+    protected static ?string $navigationGroup = 'Manajemen Pelanggan';
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-    protected static ?string $label = 'Kategori Produk';
+    protected static ?string $label = 'Kategori Pelanggan';
 
     public static function form(Form $form): Form
     {
@@ -28,9 +27,7 @@ class CategoryResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
-                    ->maxLength(255)
-                    ->label('Nama Kategori Produk')
-                    ->placeholder('Masukkan nama kategori produk'),
+                    ->maxLength(255),
             ]);
     }
 
@@ -40,7 +37,8 @@ class CategoryResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable()
-                    ->label('Kategori'),
+                    ->label('Kategori Pelanggan')
+                    ->placeholder('Masukkan nama kategori pelanggan'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -74,9 +72,9 @@ class CategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCategories::route('/'),
-            'create' => Pages\CreateCategory::route('/create'),
-            'edit' => Pages\EditCategory::route('/{record}/edit'),
+            'index' => Pages\ListCustomerCategories::route('/'),
+            'create' => Pages\CreateCustomerCategory::route('/create'),
+            'edit' => Pages\EditCustomerCategory::route('/{record}/edit'),
         ];
     }
 }
