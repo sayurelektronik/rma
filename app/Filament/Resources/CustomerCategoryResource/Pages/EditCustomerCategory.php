@@ -16,4 +16,9 @@ class EditCustomerCategory extends EditRecord
             Actions\DeleteAction::make(),
         ];
     }
+
+    protected function getRedirectUrl(): string
+    {
+        return CustomerCategoryResource::getUrl(); // Redirect ke halaman daftar customer
+    }
 }
